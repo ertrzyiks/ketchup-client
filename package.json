@@ -18,9 +18,16 @@
     "url": "https://github.com/ertrzyiks/ketchup-client/issues"
   },
   "homepage": "https://github.com/ertrzyiks/ketchup-client#readme",
-  "dependencies": {},
+  "dependencies": {
+    "vue": "^2.4.2"
+  },
   "devDependencies": {
+    "babel-core": "^6.25.0",
+    "babel-loader": "^7.1.1",
+    "babel-preset-env": "^1.6.0",
     "strip-ansi": "^4.0.0",
+    "vue-loader": "^12.2.2",
+    "vue-template-compiler": "^2.4.2",
     "webpack": "^3.3.0",
     "webpack-dev-server": "^2.5.1"
   }

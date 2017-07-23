@@ -1,10 +1,12 @@
-var CrossTabClient = require('logux-client/cross-tab-client')
+import CrossTabClient from 'logux-client/cross-tab-client'
+import Vue from 'vue/dist/vue.runtime.common.js'
+import App from './app.vue'
 
-var user = document.querySelector('meta[name=user]')
-var token = document.querySelector('meta[name=token]')
-var server = document.querySelector('meta[name=server]')
+const user = document.querySelector('meta[name=user]')
+const token = document.querySelector('meta[name=token]')
+const server = document.querySelector('meta[name=server]')
 
-var logux = new CrossTabClient({
+const logux = new CrossTabClient({
   credentials: token.content,
   subprotocol: '1.0.0',
   userId: user.content,
@@ -12,18 +14,23 @@ var logux = new CrossTabClient({
 })
 logux.start()
 
-var submit = document.getElementById('the-button')
+const submit = document.getElementById('the-button')
 
-submit.addEventListener('click', function () {
+submit.addEventListener('click', () => {
   logux.log.add({
     type: 'CLICK'
   })
 }, false)
 
-logux.on('add', function (action, meta) {
+logux.on('add', (action, meta) => {
   if (action.type === 'CLICK') {
     var li = document.createElement('li')
     li.innerHTML = 'CLICK'
     document.getElementById('content').appendChild(li)
   }
+})
+
+new Vue({
+    el: '#app',
+    render: (h) => h(App)
 })
