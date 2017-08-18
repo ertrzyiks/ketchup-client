@@ -80,6 +80,7 @@ body, html {
     display: flex;
     flex-direction: row;
     justify-content: space-around;
+    letter-spacing: 1.15px;
     max-width: 900px;
     margin: 0 auto;
 }
@@ -119,6 +120,56 @@ body, html {
     display: flex;
     justify-content: center;
     margin: 10px;
+}
+
+.how-to-use-it {
+    min-height: 50%;
+    background-color: #74a19a;
+    color: #f0f7da;
+    padding: 0 20px;
+    font-size: 18px;
+    border-top: 1px solid #f0f7da;
+}
+
+.how-to-use-it .section-header {
+    text-shadow: 5px 2px 10px #234d20;
+}
+
+.how-to-use-it-steps {
+    display: flex;
+    flex-direction: column;
+    align-items: left;
+    letter-spacing: 1.15px;
+    max-width: 900px;
+    padding-bottom: 25px;
+    margin: auto;
+}
+
+.how-to-use-it-steps .step {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.how-to-use-it .arrow {
+    display: none;
+}
+
+.guide-foto {
+    box-shadow: 1px 1px 10px 0px #435d59;
+    margin: 20px 50px;
+}
+
+.guide-foto img {
+    display: block;
+    max-width: 350px;
+    max-height: 350px;
+    width: auto;
+    height: auto;
+}
+
+.guide-foto p {
+    width: 100%;
 }
 
 @media (max-width: 420px) {
@@ -163,7 +214,6 @@ body, html {
     .how-it-works-steps {
         flex-direction: column;
         align-items: center;
-        letter-spacing: 1.15px;
     }
 
     .how-it-works {
@@ -176,6 +226,10 @@ body, html {
         content: url('assets/download-arrow.png');
         margin: 0px;
         padding: 0 0 20px;
+    }
+
+    .how-to-use-it .arrow {
+        display: block;
     }
 
     .how-to-use-it {
@@ -206,6 +260,7 @@ body, html {
 
     .guide-foto {
         box-shadow: 1px 1px 10px 0px #435d59;
+        margin: 10px auto 0;
     }
 
     .guide-foto img {
