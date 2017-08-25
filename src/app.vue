@@ -1,5 +1,5 @@
 <template>
-  <div>Hello! {{message}}</div>
+  <landing-page></landing-page>
 </template>
 
 <script>
