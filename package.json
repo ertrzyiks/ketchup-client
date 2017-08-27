@@ -6,7 +6,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "webpack --display-error-details",
-    "start:dev": "webpack-dev-server"
+    "start:dev": "webpack-dev-server",
+    "start:server": "node src/server/server.js"
   },
   "repository": {
     "type": "git",
@@ -19,12 +20,18 @@
   },
   "homepage": "https://github.com/ertrzyiks/ketchup-client#readme",
   "dependencies": {
+    "css-loader": "^0.28.4",
+    "express": "^4.15.3",
+    "logux-client": "git+https://github.com/logux/logux-client.git",
     "vue": "^2.4.2"
   },
   "devDependencies": {
     "babel-core": "^6.25.0",
     "babel-loader": "^7.1.1",
     "babel-preset-env": "^1.6.0",
+    "file-loader": "^0.11.2",
+    "node-sass": "^4.5.3",
+    "sass-loader": "^6.0.6",
     "strip-ansi": "^4.0.0",
     "vue-loader": "^12.2.2",
     "vue-template-compiler": "^2.4.2",
