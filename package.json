@@ -23,7 +23,8 @@
     "express": "^4.15.3",
     "js-cookie": "^2.1.4",
     "logux-client": "git+https://github.com/logux/logux-client.git",
-    "vue": "^2.4.2"
+    "vue": "^2.4.2",
+    "vuex": "^2.3.1"
   },
   "devDependencies": {
     "babel-core": "^6.25.0",
