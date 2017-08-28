@@ -1,5 +1,10 @@
 <template>
     <div class="landing-page">
+      <ul>
+          <li v-for="room in $store.state.rooms">
+              {{room.name}}
+          </li>
+      </ul>
       <div class="hero-image">
           <div class="hero-text">
               <h2 class="hero-title">Ketchup</h2>
