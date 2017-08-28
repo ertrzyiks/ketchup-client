@@ -1,5 +1,5 @@
 <template>
-    <div class="landing-page">
+    <div id="app" class="landing-page">
       <ul>
           <li v-for="room in $store.state.rooms">
               {{room.name}}
@@ -10,7 +10,7 @@
               <h2 class="hero-title">Ketchup</h2>
               <p class="hero-subline">Let's meet in the middle</p>
           </div>
-          <button class="start-action-button hero-button">Get started</button>
+          <router-link :to="{name: 'logux'}" class="start-action-button hero-button">Get started</router-link>
           <img class="down-chevron" src="assets/down-chevron.png" />
       </div>
       <div class="how-it-works">
@@ -54,13 +54,13 @@
           <img class="down-chevron" src="assets/down-chevron.png" />
       </div>
       <footer class="action-footer">
-          <button class="start-action-button">Get started</button>
+          <router-link :to="{name: 'logux'}" class="start-action-button hero-button">Get started</router-link>
       </footer>
      </div>
 </template>
 
 <script>
-export default {
+module.exports = {
   name: 'landing-page',
   data () {
     return {

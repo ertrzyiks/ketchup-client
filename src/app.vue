@@ -1,5 +1,7 @@
 <template>
-  <landing-page></landing-page>
+    <div id="app">
+        <router-view></router-view>
+  </div>
 </template>
 
 <script>
