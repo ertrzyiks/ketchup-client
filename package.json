@@ -22,7 +22,7 @@
     "css-loader": "^0.28.4",
     "express": "^4.15.3",
     "js-cookie": "^2.1.4",
-    "logux-client": "git+https://github.com/logux/logux-client.git",
+    "logux-client": "github:logux/logux-client",
     "vue": "^2.4.2",
     "vuex": "^2.3.1"
   },
