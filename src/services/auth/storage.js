@@ -4,7 +4,7 @@ const SESSION_COOKIE_NAME = 'ketchup-session'
 const SESSION_STORAGE_NAME = 'ketchup-access-token'
 
 export function getUserData() {
-  const userDataRaw = Cookie.get(SESSION_COOKIE_NAME) || ''
+  const userDataRaw = Cookie.get(SESSION_COOKIE_NAME) || '{}'
   const userData = JSON.parse(userDataRaw)
 
   return userData
