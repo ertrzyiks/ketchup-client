@@ -14,6 +14,10 @@ app.get('/', (req, res) => {
   return res.sendFile(path.join(__dirname + '/../index.html'))
 })
 
+app.get('/logux', (req, res) => {
+  return res.sendFile(path.join(__dirname + '/../logux.html'))
+})
+
 app.listen(3000, () => {
   console.log('Listening on port 3000')
 })
