@@ -8,7 +8,7 @@ export function connect(wsApiUrl, apiUrl) {
   return retrieveAndConnect()
     .catch(() => refreshRetrieveAndConnect())
     .catch(err => {
-      console.log('ERR', err)
+      console.error('ERR', err)
     })
 }
 

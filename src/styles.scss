@@ -1,0 +1,28 @@
+body, html {
+    height: 100%;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    //background: #f0f7da; //#2a3b35;
+    max-width: 1024px;
+    margin: 0 auto;
+}
+
+.hero-button {
+    margin: 3% 15% 10px;
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+}
+
+.start-action-button {
+    background-color: greenyellow;
+    border: solid 1px greenyellow;
+    font-size: 20px;
+    width: 20%;
+    height: 50px;
+    border-radius: 5px;
+    letter-spacing: 0.5px;
+    color: darkslategrey;
+    display: inline-flex;
+    justify-content: center;
+    min-width: 150px;
+}
