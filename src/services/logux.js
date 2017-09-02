@@ -17,7 +17,7 @@ export function createConnection(wsApiUrl, user) {
     const logux = new CrossTabClient({
       credentials: user.access_token,
       subprotocol: '1.0.0',
-      userId: user.name,
+      userId: user.id,
       server: wsApiUrl
     })
 
