@@ -1,0 +1,130 @@
+.rooms-page {
+  .rooms-header {
+    background-color: #77ab59;
+    color: white;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    height: 45px;
+    line-height: 45px;
+    padding: 10px;
+
+    .rooms-title {
+      margin: 0px;
+      font-size: 26px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      padding-right: 10px;
+      max-width: 66%;
+
+      a {
+        text-decoration: none;
+        color: white;
+      }
+    }
+
+    .user-menu-dropdown {
+      margin-left: auto;
+      max-width: 40%;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+
+      &.hidden {
+        display: none;
+      }
+
+      .user-menu-email {
+        text-decoration: none;
+        color: white;
+        cursor: pointer;
+      }
+
+      .user-menu-options {
+        display: none;
+        list-style-type: none;
+        position: absolute;
+        top: 45px;
+        z-index: 10;
+        background: white;
+        width: 40%;
+        margin: 0px;
+        border-bottom: 1px solid lightgrey;
+        border-left: 1px solid lightgrey;
+        border-right: 1px solid lightgrey;
+        padding: 0px;
+        box-sizing: content-box;
+
+        li {
+          display: block;
+          text-decoration: none;
+          padding-left: 15px;
+
+          a {
+            display: block;
+          }
+
+          &:hover {
+            background-color: lightgrey;
+          }
+        }
+
+        &.open {
+          display: block;
+        }
+      }
+    }
+  }
+
+  .page-title {
+    padding-left: 20px;
+  }
+
+  .room-list {
+    list-style-type: none;
+    min-width: 40%;
+    max-width: 60%; //desktop
+    padding-left: 20px;
+
+    .room-item {
+      padding: 10px;
+      border-bottom: 1px solid #dadada;
+
+      &:last-child {
+        border-bottom: none;
+      }
+
+      .room-details {
+        display: flex;
+        align-items: center;
+      }
+    }
+  }
+
+  .room-details {
+    .remove {
+      background-color: #FF4949;
+      border: solid 1px #FF4949;
+      color: white;
+      border-radius: 5px;
+      height: 30px;
+      min-width: 100px;
+      display: inline-flex;
+      justify-content: center;
+      align-items: center;
+      margin-left: auto;
+    }
+  }
+
+  .error-message {
+    padding-left: 20px;
+    color: #FF4949;
+    font-style: italic;
+
+    .hidden {
+      display: none;
+    }
+  }
+}
+

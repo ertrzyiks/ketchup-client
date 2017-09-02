@@ -1,0 +1,23 @@
+<div id="app" class="rooms-page">
+    <header class="rooms-header">
+        <h2 class="rooms-title"><a href="">Rooms</a></h2>
+        <div class="user-menu-dropdown">
+            <a class="user-menu-email">email@gmail.com</a>
+            <ul class="user-menu-options">
+            </ul>
+        </div>
+    </header>
+    <h3 class="page-title">Your rooms</h3>
+    <ul class="room-list">
+        <li class="room-item" v-for="room in rooms">
+            <div class="room-details">
+                <span>{{ room.name }}</span>
+                <a class="remove" v-on:click="removeUserFromRoom(room)">{{ room.isOwner ? 'Delete' : 'Leave' }}</a>
+            </div>
+        </li>
+    </ul>
+    <a class="start-action-button hero-button" v-on:click="createRoom">Create Room</a>
+    <div class="error-message" v-bind:class="{ hidden: errorMessage !== '' }">
+        <p>{{errorMessage}}</p>
+    </div>
+</div>

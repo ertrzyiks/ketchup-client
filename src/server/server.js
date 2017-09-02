@@ -14,8 +14,8 @@ app.get('/', (req, res) => {
   return res.sendFile(path.join(__dirname + '/../index.html'))
 })
 
-app.get('/logux', (req, res) => {
-  return res.sendFile(path.join(__dirname + '/../logux.html'))
+app.get('/rooms', (req, res) => {
+  return res.sendFile(path.join(__dirname + '/../rooms/rooms.html'))
 })
 
 app.listen(3000, () => {
