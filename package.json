@@ -5,8 +5,11 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "webpack --display-error-details",
-    "start": "node src/server/server.js"
+    "build:client": "webpack --display-error-details --config webpack.client.config.js",
+    "build:server": "webpack --display-error-details --config webpack.server.config.js",
+    "clean": "rm ./dist/*",
+    "build": "npm run clean && npm run build:client && npm run build:server",
+    "start": "babel-node src/server/server.js"
   },
   "repository": {
     "type": "git",
@@ -19,13 +22,19 @@
   },
   "homepage": "https://github.com/ertrzyiks/ketchup-client#readme",
   "dependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-plugin-transform-es2015-modules-commonjs": "^6.26.0",
+    "babel-preset-es2017": "^6.24.1",
     "css-loader": "^0.28.4",
     "express": "^4.15.3",
     "js-cookie": "^2.1.4",
     "logux-client": "github:logux/logux-client",
     "vue": "^2.4.2",
+    "vue-router": "^2.7.0",
+    "vue-server-renderer": "^2.4.2",
     "vuex": "^2.3.1",
-    "vue-router": "^2.7.0"
+    "webpack-merge": "^4.1.0",
+    "webpack-node-externals": "^1.6.0"
   },
   "devDependencies": {
     "babel-core": "^6.25.0",
