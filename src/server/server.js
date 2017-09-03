@@ -5,8 +5,9 @@ import webpackClientConfig from '../../webpack.client.config'
 import webpackServerConfig from '../../webpack.server.config'
 import prepareBundle from './prepare_bundle'
 import loadTemplate from './load_template'
+import rendererMiddleware from './renderer_middleware'
 
-const TEMPLATE_PATH = __dirname + '/../index.template.html'
+const TEMPLATE_PATH = __dirname + '/index.template.html'
 
 const app = express()
 
@@ -18,7 +19,6 @@ app.use(webpackMiddleware(clientBundle.compiler))
 app.use(webpackMiddleware(serverBundle.compiler))
 
 app.get('*', (req, res) => {
-  const context = { url: req.url }
 
   Promise
     .all([loadTemplate(TEMPLATE_PATH), clientBundle.loadManifest(), serverBundle.loadManifest()])
@@ -29,18 +29,7 @@ app.get('*', (req, res) => {
         clientManifest
       })
 
-      renderer.renderToString(context, (err, html) => {
-        if (err) {
-          if (err.code === 404) {
-            res.status(404).end('Page not found')
-          } else {
-            console.error(err)
-            res.status(500).end('Internal Server Error')
-          }
-        } else {
-          res.end(html)
-        }
-      })
+      rendererMiddleware(renderer)(req, res)
     })
 })
 
