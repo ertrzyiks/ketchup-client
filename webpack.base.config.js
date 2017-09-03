@@ -1,10 +1,12 @@
-var webpack = require('webpack')
+const path = require('path')
+const webpack = require('webpack')
 
 module.exports = {
   entry: './src/index.js',
   output: {
-    path: __dirname + '/dist',
-    filename: 'js/bundle.js'
+    path: path.resolve(__dirname, './dist'),
+    publicPath: '/',
+    filename: '[name].[chunkhash].js'
   },
   module: {
     rules: [

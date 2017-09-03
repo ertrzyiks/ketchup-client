@@ -1,21 +1,47 @@
-const express = require('express')
-const path = require('path')
-const webpackMiddleware = require('webpack-dev-middleware')
-const webpack = require('webpack')
-const webpackConfig = require('../../webpack.config')
+import express from 'express'
+import webpackMiddleware from 'webpack-dev-middleware'
+import { createBundleRenderer } from 'vue-server-renderer'
+import webpackClientConfig from '../../webpack.client.config'
+import webpackServerConfig from '../../webpack.server.config'
+import prepareBundle from './prepare_bundle'
+import loadTemplate from './load_template'
+
+const TEMPLATE_PATH = __dirname + '/../index.template.html'
 
 const app = express()
 
+const clientBundle = prepareBundle(webpackClientConfig, 'vue-ssr-client-manifest.json')
+const serverBundle = prepareBundle(webpackServerConfig, 'vue-ssr-server-bundle.json')
+
 app.use(express.static('public'))
+app.use(webpackMiddleware(clientBundle.compiler))
+app.use(webpackMiddleware(serverBundle.compiler))
 
-app.use(webpackMiddleware(webpack(webpackConfig)))
+app.get('*', (req, res) => {
+  const context = { url: req.url }
 
-app.get('/', (req, res) => {
-  return res.sendFile(path.join(__dirname + '/../index.html'))
-})
+  Promise
+    .all([loadTemplate(TEMPLATE_PATH), clientBundle.loadManifest(), serverBundle.loadManifest()])
+    .then(([template, clientManifest, serverManifest]) => {
+      const renderer = createBundleRenderer(serverManifest, {
+        runInNewContext: false,
+        template,
+        clientManifest
+      })
 
-app.get('/rooms', (req, res) => {
-  return res.sendFile(path.join(__dirname + '/../rooms/rooms.html'))
+      renderer.renderToString(context, (err, html) => {
+        if (err) {
+          if (err.code === 404) {
+            res.status(404).end('Page not found')
+          } else {
+            console.error(err)
+            res.status(500).end('Internal Server Error')
+          }
+        } else {
+          res.end(html)
+        }
+      })
+    })
 })
 
 app.listen(3000, () => {

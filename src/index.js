@@ -1,22 +1,10 @@
-import Vue from 'vue/dist/vue.runtime.common.js'
-import Vuex from 'vuex'
-
-import VueRouter from 'vue-router'
-
-import App from './app.vue'
-import LandingPage from './landing-page/landing-page.vue'
-import Rooms from './rooms/rooms.vue'
-
 import {connect as connectToLogux} from './services/logux'
-import {createStore} from './store'
+import createApp from './create_app'
 
 const WS_API_URL = process.env.WS_API_URL
 const API_URL = process.env.API_URL
 
-Vue.use(Vuex)
-Vue.use(VueRouter)
-
-const store = createStore(Vuex)
+const {app, store, router} = createApp()
 
 const handleAction = (action) => {
   switch(action.type) {
@@ -48,23 +36,6 @@ connectToLogux(WS_API_URL, API_URL).then(logux => {
 
 })
 
-Vue.component('landing-page', LandingPage)
-Vue.component('rooms', Rooms)
-
-const routes = [
-    { path: '/rooms', name: 'rooms', component: Rooms },
-    { path: '/', component: LandingPage },
-]
-
-const router = new VueRouter({
-    mode: 'history',
-    base: __dirname,
-    routes
+router.onReady(() => {
+  app.$mount('#app')
 })
-
-const app = new Vue({
-    router,
-    store,
-    render: (x) => x(App),
-    components: { LandingPage, Rooms }
-}).$mount('#app')

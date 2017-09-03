@@ -1,4 +1,4 @@
-export function createStore(Vuex){
+export default Vuex => {
   return new Vuex.Store({
     state: {
       rooms_loading: true,
