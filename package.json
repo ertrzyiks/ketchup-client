@@ -6,10 +6,14 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build:client": "webpack --display-error-details --config webpack.client.config.js",
-    "build:server": "webpack --display-error-details --config webpack.server.config.js",
-    "clean": "rm ./dist/*",
+    "build:server": "npm run build:server:babel && npm run build:server:webpack",
+    "build:server:webpack": "webpack --display-error-details --config webpack.server.config.js",
+    "build:server:babel": "babel ./src/server --out-dir ./build/server --source-maps && npm run copy:server:template",
+    "copy:server:template": "cp ./src/server/index.template.html ./build/server",
+    "clean": "rm -f ./dist/*",
     "build": "npm run clean && npm run build:client && npm run build:server",
-    "start": "babel-node src/server/server.js"
+    "start": "babel-node src/server/server.js",
+    "start:prod": "node build/server/server.js"
   },
   "repository": {
     "type": "git",
