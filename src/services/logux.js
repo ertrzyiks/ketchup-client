@@ -14,6 +14,7 @@ export function connect(wsApiUrl, apiUrl) {
 
 export function createConnection(wsApiUrl, user) {
   return new Promise((resolve, reject) => {
+    console.log('connect - USER', user)
     const logux = new CrossTabClient({
       credentials: user.access_token,
       subprotocol: '1.0.0',

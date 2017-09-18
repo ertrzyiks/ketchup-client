@@ -8,25 +8,28 @@ export default Vuex => {
     mutations: {
       setRooms (state, rooms) {
         console.log('rooms', rooms)
-        state.rooms = mapRooms(rooms)
+        const mappedRooms = mapRooms(rooms, state.logux.options.userId)
+        state.rooms.push(...mappedRooms)
+
+        console.log('mapped rooms', mappedRooms)
+        console.log('state.rooms updated - set rooms', state.rooms)
       },
 
       addRoom (state, room) {
         console.log('add room')
         state.rooms.push(mapRoom(room, state.logux.options.userId))
 
+        console.log('room.state updated on add')
+
         console.log('state rooms: ', state.rooms)
         state.rooms_loading = false
       },
 
-      removeRoom (state, room) {
-        console.log('remove room')
-        // const roomNameToRemove = state.rooms.find(r => r.name !== room.name))
-        // console.log('updated rooms', updatedRooms)
-        // state.rooms = updatedRooms
+      removeRoom (state, roomId) {
+        console.log('remove room', roomId)
 
         for (let i = 0; i < state.rooms.length; i++) {
-          if (state.rooms[i].name === room.name) {
+          if (state.rooms[i].id === roomId) {
             state.rooms.splice(i, 1);
             break;
           }
@@ -42,10 +45,10 @@ export default Vuex => {
 }
 
 function mapRoom(room, currentUserId) {
-  const isOwner = room.creatorId === currentUserId
+  const isOwner = room.owner_id === currentUserId
   return Object.assign({}, room, { isOwner })
 }
 
-function mapRooms(rooms) {
-  return rooms.map(mapRoom)
+function mapRooms(rooms, currentUserId) {
+  return rooms.map(r => mapRoom(r, currentUserId))
 }
