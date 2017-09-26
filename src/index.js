@@ -28,7 +28,7 @@ connectToLogux(WS_API_URL, API_URL).then(logux => {
 
   console.log('what is userid', userId)
 
-  logux.log.add({ type: 'logux/subscribe', name: `users/${userId}` }, {sync: true, reasons: ['subscribe']})
+  logux.log.add({ type: 'logux/subscribe', channel: `users/${userId}` }, {sync: true, reasons: ['subscribe']})
 
   store.commit('setLogux', logux)
 })
