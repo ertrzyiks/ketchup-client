@@ -9,6 +9,7 @@ export default Vuex => {
       setRooms (state, rooms) {
         console.log('rooms', rooms)
         const mappedRooms = mapRooms(rooms, state.logux.options.userId)
+        state.rooms.splice(0, state.rooms.length)
         state.rooms.push(...mappedRooms)
 
         console.log('mapped rooms', mappedRooms)
@@ -16,13 +17,25 @@ export default Vuex => {
       },
 
       addRoom (state, room) {
-        console.log('add room')
+        console.log('store: add room', room)
         state.rooms.push(mapRoom(room, state.logux.options.userId))
 
-        console.log('room.state updated on add')
-
-        console.log('state rooms: ', state.rooms)
         state.rooms_loading = false
+      },
+
+      updateRoomDetails (state, {room, actionId}) {
+        console.log('room for updating', room)
+        console.log('action id', actionId)
+
+        let roomToUpdate = state.rooms.find(r => arraysEqual(r.actionId, actionId))
+        if (!roomToUpdate) {
+          console.log('There is no room with action id:', actionId)
+          return
+        }
+
+        console.log('room current', roomToUpdate)
+
+        Object.assign(roomToUpdate, mapRoom(room, state.logux.options.userId), { isPending: false, actionId: undefined })
       },
 
       removeRoom (state, roomId) {
@@ -51,4 +64,10 @@ function mapRoom(room, currentUserId) {
 
 function mapRooms(rooms, currentUserId) {
   return rooms.map(r => mapRoom(r, currentUserId))
+}
+
+function arraysEqual(array1, array2) {
+  array1 = Array.isArray(array1) ? array1 : [];
+  array2 = Array.isArray(array2) ? array2 : [];
+  return array1.length === array2.length && array1.every((el, ndx) => el === array2[ndx]);
 }

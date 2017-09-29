@@ -12,7 +12,10 @@
         <li class="room-item" v-for="room in rooms">
             <div class="room-details">
                 <span>{{ room.name }}</span>
-                <a class="remove" v-on:click="removeUserFromRoom(room)">{{ room.isOwner ? 'Delete' : 'Leave' }}</a>
+                <a class="remove" v-on:click="removeUserFromRoom(room)" v-bind:class="{ hidden: room.isPending }">{{ room.isOwner ? 'Delete' : 'Leave' }}</a>
+                <div class="pending" v-bind:class="{ hidden: !room.isPending }">
+                    Pending...
+                </div>
             </div>
         </li>
     </ul>

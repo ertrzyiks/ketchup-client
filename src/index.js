@@ -13,11 +13,16 @@ const handleAction = (action) => {
       store.commit('setRooms', action.rooms)
       break;
     case 'CREATED_ROOM_DETAILS':
-      store.commit('addRoom', action.room)
+      console.log('createdRoomDetails', action)
+      store.commit('updateRoomDetails', {room: action.room, actionId: action.originalActionId})
       break
     case 'REMOVE_ROOM_DETAILS':
       console.log('remove room action client')
       store.commit('removeRoom', action.roomId)
+      break
+    case 'logux/undo':
+      console.log('received logux/undo action for:', action.id)
+      break;
   }
 }
 
