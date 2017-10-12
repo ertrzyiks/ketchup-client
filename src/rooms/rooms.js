@@ -7,6 +7,15 @@ module.exports = {
       errorMessage: ''
     }
   },
+  computed: {
+    connected () {
+      if (!this.$store.state.logux) {
+        return false
+      }
+
+      return this.$store.state.logux.sync.connected
+    }
+  },
   methods: {
     createRoom: function() {
       this.errorMessage = ''

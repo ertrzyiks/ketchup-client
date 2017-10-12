@@ -1,5 +1,5 @@
-<div id="app" class="rooms-page">
-    <header class="rooms-header">
+<div class="rooms-page">
+    <header class="rooms-header" v-bind:class="{ offline: !connected }">
         <h2 class="rooms-title"><a href="">Rooms</a></h2>
         <div class="user-menu-dropdown">
             <a class="user-menu-email">email@gmail.com</a>
