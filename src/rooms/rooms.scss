@@ -9,6 +9,10 @@
     line-height: 45px;
     padding: 10px;
 
+    &.offline {
+      background-color: #999;
+    }
+
     .rooms-title {
       margin: 0px;
       font-size: 26px;
