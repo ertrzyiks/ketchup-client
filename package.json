@@ -32,7 +32,7 @@
     "css-loader": "^0.28.4",
     "express": "^4.15.3",
     "js-cookie": "^2.1.4",
-    "logux-client": "github:logux/logux-client#712af9e758a25d5bf602aa7549a5c5f3b7cd52d5",
+    "logux-client": "github:logux/logux-client#e23a3115ace7a922508c7bcd7e9d2d60e4625b2b",
     "vue": "^2.4.2",
     "vue-router": "^2.7.0",
     "vue-server-renderer": "^2.4.2",
