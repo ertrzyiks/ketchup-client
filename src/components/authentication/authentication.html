@@ -1,0 +1,7 @@
+<div>
+	<div v-if="!$store.state.authenticated">
+		Loading...
+	</div>
+
+	<slot v-if="$store.state.authenticated"></slot>
+</div>
