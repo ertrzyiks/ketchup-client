@@ -22,14 +22,18 @@ export function refreshUserSession(wsApiUrl) {
     })
 }
 
-export function retrieveUserSession(wsApiUrl) {
+export function getLocalUserSession() {
   const storedAccessToken = getUserAccessToken()
   const userData = storedAccessToken && getUserData()
 
   if (storedAccessToken && userData && userData.id && userData.name) {
-    return Promise.resolve({id: userData.id, name: userData.name, access_token: storedAccessToken})
+    return {id: userData.id, name: userData.name, access_token: storedAccessToken}
   }
 
+  return false
+}
+
+export function retrieveUserSession(wsApiUrl) {
   return registerUser(wsApiUrl).then(({id, name, access_token, refresh_token}) => {
     setUserData({id, name, refresh_token})
     setUserAccessToken(access_token)

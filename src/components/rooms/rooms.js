@@ -1,19 +1,15 @@
 module.exports = {
   name: 'rooms',
   data () {
-    var that = this
     return {
       rooms: this.$store.state.rooms,
-      errorMessage: '',
+      errorMessage: ''
     }
   },
-  computed: {
-    connected () {
-      if (!this.$store.state.logux) {
-        return false
-      }
 
-      return this.$store.state.logux.sync.connected
+  computed: {
+    offline () {
+      return this.$store.state.authenticated && !this.$store.state.connected
     }
   },
   methods: {

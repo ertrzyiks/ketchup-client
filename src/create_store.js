@@ -3,11 +3,21 @@ export default Vuex => {
     state: {
       rooms_loading: true,
       rooms: [],
-      logux: null
+      authenticated: false,
+      connected: false
     },
     mutations: {
+      connected (state, connected) {
+        state.connected = connected
+      },
+
+      authenticate (state) {
+        state.authenticated = true
+      },
+
       setRooms (state, rooms) {
         console.log('rooms', rooms)
+        console.log('state.rooms', state.rooms)
         const mappedRooms = mapRooms(rooms, state.logux.options.userId)
         state.rooms.splice(0, state.rooms.length)
         state.rooms.push(...mappedRooms)
@@ -50,7 +60,7 @@ export default Vuex => {
       },
 
       setLogux (state, logux) {
-        console.log('setting logux')
+        console.log('setting logux', null)
         state.logux = logux
       }
     }
