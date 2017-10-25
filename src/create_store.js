@@ -1,21 +1,10 @@
-export default (Vuex, plugins) => {
+export default (Vuex) => {
   return new Vuex.Store({
     state: {
       rooms_loading: true,
-      rooms: [],
-      authenticated: false,
-      connected: false
+      rooms: []
     },
-    plugins,
     mutations: {
-      connected (state, connected) {
-        state.connected = connected
-      },
-
-      authenticate (state) {
-        state.authenticated = true
-      },
-
       setRooms (state, rooms) {
         console.log('rooms', rooms)
         console.log('state.rooms', state.rooms)
@@ -58,11 +47,6 @@ export default (Vuex, plugins) => {
             break;
           }
         }
-      },
-
-      setLogux (state, logux) {
-        console.log('setting logux', null)
-        state.logux = logux
       }
     }
   })

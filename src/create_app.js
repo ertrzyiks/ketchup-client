@@ -7,6 +7,9 @@ import App from './components/app.vue'
 import LandingPage from './components/landing-page/landing-page.vue'
 import Rooms from './components/rooms/rooms.vue'
 import Authentication from './components/authentication/authentication.vue'
+import VueLogux from './plugins/logux'
+
+const WS_API_URL = process.env.WS_API_URL
 
 const createLoguxPlugin = (handleActions) => {
   return store => {
@@ -54,6 +57,9 @@ export default () => {
   Vue.use(Vuex)
   Vue.use(VueRouter)
 
+  const store = createStore(Vuex)
+  Vue.use(VueLogux, {store, wsApiUrl: WS_API_URL})
+
   Vue.component('landing-page', LandingPage)
   Vue.component('rooms', Rooms)
   Vue.component('authentication', Authentication)
@@ -69,7 +75,6 @@ export default () => {
     routes
   })
 
-  const store = createStore(Vuex, [loguxPlugin])
 
   const app = new Vue({
     router,

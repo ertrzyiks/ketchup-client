@@ -1,13 +1,24 @@
 import CrossTabClient from 'logux-client/cross-tab-client'
 import {getLocalUserSession, refreshUserSession, retrieveUserSession} from './auth/index'
 
-function createLogux(wsApiUrl, user) {
+export function createConnection(wsApiUrl, user) {
   return new CrossTabClient({
     credentials: user.access_token || '',
     subprotocol: '1.0.0',
     userId: user.id || '',
     server: wsApiUrl
   })
+}
+
+export function get ({apiUrl}) {
+  return Promise.resolve(getLocalUserSession())
+    .then(user => {
+      if (user === false) {
+        return retrieveUserSession(apiUrl)
+      }
+
+      return user
+    })
 }
 
 export function connect ({wsApiUrl, apiUrl}) {
@@ -29,7 +40,7 @@ export function connect ({wsApiUrl, apiUrl}) {
 }
 
 export function connectToLogux ({userData, wsApiUrl, apiUrl}) {
-  const logux = createLogux(wsApiUrl, userData)
+  const logux = createConnection(wsApiUrl, userData)
 
   logux.sync.on('connect', () => {
     const userId = logux.options.userId
