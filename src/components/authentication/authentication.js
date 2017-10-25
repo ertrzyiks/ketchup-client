@@ -9,8 +9,13 @@ module.exports = {
   beforeMount: function () {
     connect({
       wsApiUrl: WS_API_URL,
-      apiUrl: API_URL,
-      store: this.$store
+      apiUrl: API_URL
+    }).then(logux => {
+      logux.start()
+      this.$store.commit('setLogux', logux)
+
+      const userId = logux.options.userId
+      logux.log.add({ type: 'logux/subscribe', channel: `users/${userId}` }, {sync: true})
     })
   }
 }

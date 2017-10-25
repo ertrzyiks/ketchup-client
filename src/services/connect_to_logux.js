@@ -10,7 +10,7 @@ function createLogux(wsApiUrl, user) {
   })
 }
 
-export function connect ({wsApiUrl, apiUrl, store}) {
+export function connect ({wsApiUrl, apiUrl}) {
   return Promise.resolve(getLocalUserSession())
     .then(user => {
       if (user === false) {
@@ -23,49 +23,17 @@ export function connect ({wsApiUrl, apiUrl, store}) {
       return connectToLogux({
         userData,
         wsApiUrl,
-        apiUrl,
-        store
+        apiUrl
       })
     })
 }
 
-export function connectToLogux ({userData, wsApiUrl, apiUrl, store}) {
+export function connectToLogux ({userData, wsApiUrl, apiUrl}) {
   const logux = createLogux(wsApiUrl, userData)
-  store.commit('setLogux', logux)
-
-  logux.sync.on('state', function () {
-    store.commit('connected', logux.sync.connected)
-  })
 
   logux.sync.on('connect', () => {
-    store.commit('authenticate')
-
     const userId = logux.options.userId
     logux.log.add({ type: 'logux/subscribe', channel: `users/${userId}` }, {sync: true})
-  })
-
-  logux.log.on('add', (action) => {
-
-    console.log('ACTION', action)
-
-    switch(action.type) {
-      case 'LIST_ROOMS':
-        console.log('handling action list rooms', action.rooms)
-        store.commit('setRooms', action.rooms)
-        break;
-      case 'CREATED_ROOM_DETAILS':
-        console.log('createdRoomDetails', action)
-
-        store.commit('updateRoomDetails', {room: action.room, actionId: action.originalActionId})
-        break
-      case 'REMOVE_ROOM_DETAILS':
-        console.log('remove room action client')
-        store.commit('removeRoom', action.roomId)
-        break
-      case 'logux/undo':
-        console.log('received logux/undo action for:', action.id)
-        break;
-    }
   })
 
   logux.sync.on('error', err => {
@@ -76,8 +44,6 @@ export function connectToLogux ({userData, wsApiUrl, apiUrl, store}) {
       })
     }
   })
-
-  logux.start()
 
   return logux
 }

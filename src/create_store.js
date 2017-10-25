@@ -1,4 +1,4 @@
-export default Vuex => {
+export default (Vuex, plugins) => {
   return new Vuex.Store({
     state: {
       rooms_loading: true,
@@ -6,6 +6,7 @@ export default Vuex => {
       authenticated: false,
       connected: false
     },
+    plugins,
     mutations: {
       connected (state, connected) {
         state.connected = connected
